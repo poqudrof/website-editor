@@ -20,7 +20,7 @@ func InitDB() (*gorm.DB, error) {
 	}
 
 	// Auto migrate the schema
-	db.AutoMigrate(&Content{})
+	db.AutoMigrate(&Content{}, &AICommand{})
 
 	return db, nil
 }

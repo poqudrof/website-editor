@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  site-editor:
+    image: site-builder/simpledb:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: site-editor
+    ports:
+      - "9000:9000"
+    volumes:
+      # Persist the SQLite database
+      - ./backend/content.db:/root/content.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9000/api/content/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
