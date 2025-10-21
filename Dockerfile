@@ -19,17 +19,36 @@ COPY backend/*.go ./
 # Build the application
 RUN CGO_ENABLED=1 GOOS=linux go build -a -installsuffix cgo -o site-editor .
 
-# Runtime stage
-FROM alpine:latest
+# Runtime stage with Node and Claude CLI
+FROM node:20-alpine
 
-# Install runtime dependencies
-RUN apk --no-cache add ca-certificates sqlite-libs
+# Install required dependencies
+RUN apk add --no-cache \
+    ca-certificates \
+    curl \
+    bash \
+    git \
+    vim \
+    nano \
+    sqlite-libs
 
-# Create app directory
-WORKDIR /root/
+# Install Claude CLI globally
+RUN npm install -g @anthropic-ai/claude-code
 
-# Copy the binary from builder
+# Create app and workspace directories with proper permissions
+RUN mkdir -p /app /workspace && \
+    chown -R node:node /app /workspace
+
+# Set working directory
+WORKDIR /app
+
+# Copy the Go binary from builder and set permissions
 COPY --from=builder /app/site-editor .
+RUN chown node:node /app/site-editor && \
+    chmod +x /app/site-editor
+
+# Switch to node user
+USER node
 
 # Expose port
 EXPOSE 9000
