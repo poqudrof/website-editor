@@ -114,16 +114,39 @@ The system preserves the original HTML content while tracking user edits separat
 3. **After editing**: Shows edited version
 4. **Future feature**: Can revert to original anytime
 
+## Landing Page
+
+The presentation page lives in `landing/` (static HTML + Tailwind, in French).
+Its hero is a working demo of the inline editing gesture.
+
+```bash
+cd landing
+npm install
+
+# Watch mode: compiles styles.css next to index.html, then open index.html
+npm run dev
+
+# Production build into landing/dist/
+npm run build
+```
+
+Pushing changes under `landing/` to `main` deploys `landing/dist/` to GitHub Pages
+via `.github/workflows/landing.yml` (it can also be run manually from the Actions tab).
+The repository's Pages source must be set to **GitHub Actions**.
+
+The colour palette is defined once, as CSS variables in the `:root` block of `landing/index.html`.
+
 ## Project Structure
 
 ```
 site-editor/
-├── backend/          # This directory
+├── backend/          # Go server
 │   ├── main.go      # Server setup (Fiber + port 9000)
 │   ├── db.go        # Database models (GORM + SQLite)
 │   ├── handlers.go  # API handlers (GET/PUT)
 │   ├── go.mod       # Dependencies
 │   └── content.db   # SQLite database (auto-generated)
+├── landing/          # Presentation page (GitHub Pages)
 ├── frontend-tutorial.md  # Next.js integration guide
 └── README.md        # This file
 ```

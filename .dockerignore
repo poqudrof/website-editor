@@ -6,6 +6,10 @@
 *.md
 !README.md
 
+# Landing page (deployed to GitHub Pages, not part of the image)
+landing
+.github
+
 # Backend build artifacts
 backend/site-editor
 backend/content.db
