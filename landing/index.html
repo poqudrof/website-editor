@@ -84,6 +84,18 @@
     #navbar { transition: background 0.25s ease, box-shadow 0.25s ease; }
     #navbar.scrolled { background: white !important; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 
+    /* Encart « Du même auteur » */
+    .aside-link {
+      display: flex; align-items: center; gap: 0.875rem;
+      padding: 0.875rem 1rem; border-radius: 0.625rem;
+      background: white; border: 1px solid var(--primary-border);
+      text-decoration: none; min-width: 0;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .aside-link:hover { border-color: var(--primary); box-shadow: 0 2px 10px rgba(43,92,158,0.08); }
+    .aside-link .arrow { margin-left: auto; flex-shrink: 0; color: var(--primary); transition: transform 0.2s ease; }
+    .aside-link:hover .arrow { transform: translateX(3px); }
+
     /* Terminal cursor */
     .blink { animation: blink 1s step-end infinite; }
     @keyframes blink { 50% { opacity: 0; } }
@@ -178,6 +190,7 @@
       html { scroll-behavior: auto; }
       body, .blink, [data-editable].saved, .demo-log .new { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
+      .aside-link, .aside-link .arrow { transition: none; }
     }
   </style>
   <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
@@ -436,6 +449,47 @@
   <!-- ======================== AI COMMANDS ======================== -->
   <section id="ai" class="py-20" style="background:#FAFAFA;">
     <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Encart : du même auteur -->
+      <aside aria-label="Du même auteur" class="reveal mb-16 rounded-xl p-5 sm:p-6"
+             style="background:var(--primary-tint); border:1px solid var(--primary-border);">
+        <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:var(--primary);">Du même auteur</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <a href="https://plati.jeremy-laviole.fr/fr/" class="aside-link">
+            <span class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-lg" style="background:var(--primary-tint);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="7" rx="1.5"/>
+                <rect x="3" y="13" width="18" height="7" rx="1.5"/>
+                <line x1="7" y1="7.5" x2="7.01" y2="7.5"/>
+                <line x1="7" y1="16.5" x2="7.01" y2="16.5"/>
+              </svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block font-semibold text-gray-900" style="font-size:0.9375rem;">Plati</span>
+              <span class="block text-gray-500" style="font-size:0.875rem; line-height:1.45;">Le serveur privé le plus simple pour les petites entreprises</span>
+            </span>
+            <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="https://jeremy-laviole.fr" class="aside-link">
+            <span class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-lg" style="background:var(--secondary-tint);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="1.75"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block font-semibold text-gray-900" style="font-size:0.9375rem;">Jérémy Laviole</span>
+              <span class="block text-gray-500" style="font-size:0.875rem; line-height:1.45;">Présentation de l'auteur</span>
+            </span>
+            <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </aside>
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
         <div class="reveal min-w-0">
@@ -810,6 +864,8 @@
         <div class="flex flex-wrap gap-6">
           <a href="https://github.com/poqudrof/website-editor/blob/main/frontend-tutorial.md" class="text-sm text-gray-400 no-underline hover:text-primary transition-colors">Tutoriel</a>
           <a href="https://github.com/poqudrof/website-editor/blob/main/Agent-api-final.md" class="text-sm text-gray-400 no-underline hover:text-primary transition-colors">Référence API</a>
+          <a href="https://plati.jeremy-laviole.fr/fr/" class="text-sm text-gray-400 no-underline hover:text-primary transition-colors">Plati</a>
+          <a href="https://jeremy-laviole.fr" class="text-sm text-gray-400 no-underline hover:text-primary transition-colors">Jérémy Laviole</a>
           <a href="https://github.com/poqudrof" class="text-sm text-gray-400 no-underline hover:text-primary transition-colors">Contact</a>
         </div>
 
